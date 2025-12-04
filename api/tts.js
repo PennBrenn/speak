@@ -15,11 +15,12 @@ export default async function handler(req, res) {
     // ============================
     //
     try {
-      const voicesRes = await fetch("https://api.elevenlabs.io/v1/voices", {
-        headers: {
-          "xi-api-key": process.env.ELEVENLABS_API_KEY
-        }
-      });
+const voicesFormatted = data.voices
+  .filter(v => v.category === "cloned" || v.category === "generated")
+  .map(v => ({
+    id: v.voice_id,
+    name: v.name
+  }));
 
       const data = await voicesRes.json();
 
