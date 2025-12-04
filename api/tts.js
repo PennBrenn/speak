@@ -8,44 +8,46 @@ const allowedUsers = [
 // -------------------
 
 export default async function handler(req, res) {
+
+  // =====================================================
+  //                   GET → RETURN VOICES
+  // =====================================================
   if (req.method === "GET") {
-    //
-    // ============================
-    //  AUTO-LOAD ALL ELEVENLABS VOICES
-    // ============================
-    //
     try {
-const voicesFormatted = data.voices
-  .filter(v => v.category === "cloned" || v.category === "generated")
-  .map(v => ({
-    id: v.voice_id,
-    name: v.name
-  }));
+      // Fetch all voices
+      const voicesRes = await fetch("https://api.elevenlabs.io/v1/voices", {
+        headers: {
+          "xi-api-key": process.env.ELEVENLABS_API_KEY
+        }
+      });
 
       const data = await voicesRes.json();
 
-      // Return a clean list to the frontend
-      const voicesFormatted = data.voices.map(v => ({
-        id: v.voice_id,
-        name: v.name
-      }));
+      // Filter to ONLY custom voices:
+      const voicesFormatted = data.voices
+        .filter(v => v.category === "cloned" || v.category === "generated")
+        .map(v => ({
+          id: v.voice_id,
+          name: v.name
+        }));
 
       return res.status(200).json({ voices: voicesFormatted });
 
     } catch (err) {
+      console.error("VOICE LOAD ERROR:", err);
       return res.status(500).json({ error: "Failed to load voices" });
     }
   }
 
+
+
+  // =====================================================
+  //                POST → GENERATE AUDIO
+  // =====================================================
   if (req.method === "POST") {
-    //
-    // ============================
-    //  TEXT-TO-SPEECH HANDLER
-    // ============================
-    //
     const { userId, text, voiceId } = JSON.parse(req.body);
 
-    // Gatekeeper: user ID required
+    // Validate user ID
     if (!userId || userId.trim() === "") {
       return res.status(400).json({ error: "Missing user ID" });
     }
@@ -54,12 +56,12 @@ const voicesFormatted = data.voices
       return res.status(403).json({ error: "Invalid user ID" });
     }
 
-    // Must have text
+    // Validate text
     if (!text || text.trim() === "") {
       return res.status(400).json({ error: "Missing text" });
     }
 
-    // Default voice if none chosen
+    // Default voice (fallback if needed)
     const selectedVoice = voiceId || "EXISTING_DEFAULT_VOICE_ID";
 
     try {
@@ -82,17 +84,19 @@ const voicesFormatted = data.voices
       );
 
       const audioBuffer = await response.arrayBuffer();
-
       res.setHeader("Content-Type", "audio/mpeg");
       res.send(Buffer.from(audioBuffer));
 
     } catch (error) {
+      console.error("TTS ERROR:", error);
       return res.status(500).json({ error: "TTS generation failed" });
     }
   }
 
-  //
-  // Unsupported method
-  //
+
+
+  // =====================================================
+  //                  METHOD NOT ALLOWED
+  // =====================================================
   return res.status(405).json({ error: "Method not allowed" });
 }
