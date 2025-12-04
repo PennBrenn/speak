@@ -2,97 +2,147 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Friend Voice Generator</title>
+<title>PTTS V1</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f2f2f7;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        height: 100vh;
-    }
-    .donateBtn {
-    margin-top: 15px;
-    background: #ff4f70;
+/* === GLOBAL === */
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #0d1117, #000000);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    color: #e5e5e5;
+}
+
+/* === GLASS CONTAINER === */
+.container {
+    width: 90%;
+    max-width: 500px;
+    margin-top: 40px;
+    padding: 25px;
+    border-radius: 16px;
+
+    /* Glass effect */
+    background: rgba(20, 25, 35, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(0, 255, 255, 0.08);
+    box-shadow: 0px 8px 32px rgba(0, 255, 255, 0.12);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00eaff;
+    font-weight: 700;
+}
+
+/* === LABELS === */
+label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 10px;
+    display: block;
+    color: #a9d5ff;
+}
+
+/* === INPUTS & TEXTAREA === */
+input, textarea, select {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    color: #e5e5e5;
+    
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+
+    transition: border 0.2s, background 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #00eaff;
+    background: rgba(0, 255, 255, 0.07);
+}
+
+textarea {
+    resize: none;
+    height: 120px;
+}
+
+/* === PRIMARY BUTTON === */
+button {
+    width: 100%;
     padding: 14px;
-    color: #fff;
+    font-size: 16px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+
+    background: #00c8ff;
+    background: linear-gradient(135deg, #00eaff, #00aaff);
+    color: #00141a;
+    font-weight: bold;
+    cursor: pointer;
+
+    box-shadow: 0px 4px 20px rgba(0, 200, 255, 0.25);
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #00ffff, #00bbff);
+    transform: translateY(-1px);
+}
+
+/* === DONATE BUTTON === */
+.donateBtn {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #00ffc8, #00cc96);
+    padding: 14px;
+    color: #002016;
     border: none;
     width: 100%;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.25s ease;
+    font-weight: bold;
+    box-shadow: 0px 4px 20px rgba(0, 255, 200, 0.25);
 }
 
 .donateBtn:hover {
-    background: #e64563;
+    background: linear-gradient(135deg, #00ffe0, #00e0ad);
+    transform: translateY(-1px);
 }
 
-    .container {
-        background: #fff;
-        width: 90%;
-        max-width: 500px;
-        margin-top: 40px;
-        padding: 25px;
-        border-radius: 16px;
-        box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-    }
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #2d2d2d;
-        font-weight: 600;
-    }
-    label {
-        font-size: 15px;
-        font-weight: 600;
-        margin-top: 10px;
-        display: block;
-        color: #555;
-    }
-    input, textarea, select {
-        width: 100%;
-        margin-top: 6px;
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        font-size: 15px;
-        outline: none;
-        box-sizing: border-box;
-    }
-    textarea {
-        resize: none;
-        height: 120px;
-    }
-    button {
-        width: 100%;
-        padding: 14px;
-        font-size: 16px;
-        margin-top: 20px;
-        border: none;
-        border-radius: 10px;
-        background: #4a73ff;
-        color: white;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-    button:hover {
-        background: #3b5edb;
-    }
-    #audioPlayer {
-        width: 100%;
-        margin-top: 20px;
-        display: none;
-    }
-    .loading {
-        margin-top: 10px;
-        text-align: center;
-        font-size: 14px;
-        color: #777;
-    }
+/* === AUDIO PLAYER === */
+#audioPlayer {
+    width: 100%;
+    margin-top: 20px;
+    display: none;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    padding: 8px;
+    border-radius: 10px;
+}
+
+/* === LOADING TEXT === */
+.loading {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #7fdfff;
+}
+
 </style>
 </head>
 <body>
