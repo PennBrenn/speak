@@ -1,9 +1,8 @@
 // ---- USER IDS ----
 const allowedUsers = [
-  "user1",
-  "john23",
-  "friendA",
-  "mycoolid"
+  "guest",
+  "penn",
+  "garmin"
 ];
 // -------------------
 
