@@ -1,44 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Friend Voice TTS</title>
-    <style>
-        body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
-        input, textarea, button { width: 100%; margin-top: 10px; padding: 10px; font-size: 16px; }
-    </style>
+<meta charset="UTF-8">
+<title>Friend Voice Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f7;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+    }
+    .container {
+        background: #fff;
+        width: 90%;
+        max-width: 500px;
+        margin-top: 40px;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2d2d2d;
+        font-weight: 600;
+    }
+    label {
+        font-size: 15px;
+        font-weight: 600;
+        margin-top: 10px;
+        display: block;
+        color: #555;
+    }
+    input, textarea, select {
+        width: 100%;
+        margin-top: 6px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        outline: none;
+        box-sizing: border-box;
+    }
+    textarea {
+        resize: none;
+        height: 120px;
+    }
+    button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 10px;
+        background: #4a73ff;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    button:hover {
+        background: #3b5edb;
+    }
+    #audioPlayer {
+        width: 100%;
+        margin-top: 20px;
+        display: none;
+    }
+    .loading {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+    }
+</style>
 </head>
 <body>
 
-<h2>Friend Voice Generator</h2>
+<div class="container">
+    <h2>Friend Voice Generator</h2>
 
-<label>User ID:</label>
-<input type="text" id="userId" placeholder="Enter your user ID">
+    <label>User ID:</label>
+    <input type="text" id="userId" placeholder="Enter your user ID">
 
-<label>Text to speak:</label>
-<textarea id="text" rows="5" placeholder="Type something..."></textarea>
+    <label>Choose a voice:</label>
+    <select id="voiceId">
+        <option>Loading voices...</option>
+    </select>
 
-<button onclick="generateAudio()">Speak</button>
+    <label>Text to speak:</label>
+    <textarea id="text" placeholder="Type something..."></textarea>
 
-<audio id="audioPlayer" controls style="margin-top:20px; width:100%; display:none;"></audio>
+    <button onclick="generateAudio()">Speak</button>
+
+    <div id="loading" class="loading" style="display:none;">Generating audio...</div>
+
+    <audio id="audioPlayer" controls></audio>
+</div>
 
 <script>
+// ============================
+// LOAD VOICES AUTOMATICALLY
+// ============================
+async function loadVoices() {
+    try {
+        const res = await fetch("/api/tts");
+        const data = await res.json();
+
+        const select = document.getElementById("voiceId");
+        select.innerHTML = "";
+
+        data.voices.forEach(v => {
+            const opt = document.createElement("option");
+            opt.value = v.id;
+            opt.textContent = v.name;
+            select.appendChild(opt);
+        });
+
+    } catch (e) {
+        alert("Failed to load voices.");
+    }
+}
+
+loadVoices();
+
+
+// ============================
+// GENERATE AUDIO
+// ============================
 async function generateAudio() {
     const userId = document.getElementById("userId").value.trim();
     const text = document.getElementById("text").value.trim();
+    const voiceId = document.getElementById("voiceId").value;
 
-    if (!userId) {
-        alert("Please enter your user ID.");
-        return;
-    }
-    if (!text) {
-        alert("Please type some text.");
-        return;
-    }
+    if (!userId) return alert("Please enter your User ID.");
+    if (!text) return alert("Please type some text.");
+
+    document.getElementById("loading").style.display = "block";
 
     const response = await fetch("/api/tts", {
         method: "POST",
-        body: JSON.stringify({ userId, text })
+        body: JSON.stringify({ userId, text, voiceId })
     });
+
+    document.getElementById("loading").style.display = "none";
 
     if (!response.ok) {
         alert("Error generating audio.");
