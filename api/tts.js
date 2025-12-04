@@ -1,33 +1,30 @@
-// ---- ADD USER IDS HERE ----
 const allowedUsers = [
   "user1",
   "john23",
   "friendA",
   "mycoolid"
 ];
-// ----------------------------
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { userId, text } = JSON.parse(req.body);
+  const { userId, text, voiceId } = JSON.parse(req.body);
 
-  // Basic user ID gate
   if (!userId || userId.trim() === "") {
     return res.status(400).json({ error: "Missing user ID" });
   }
 
-  // ---- CHECK USER ID ----
   if (!allowedUsers.includes(userId)) {
     return res.status(403).json({ error: "Invalid user ID" });
   }
-  // ------------------------
+
+  const selectedVoice = voiceId || "YOUR_DEFAULT_VOICE_ID";
 
   try {
     const response = await fetch(
-      "https://api.elevenlabs.io/v1/text-to-speech/YOUR_VOICE_ID",
+      `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice}`,
       {
         method: "POST",
         headers: {
