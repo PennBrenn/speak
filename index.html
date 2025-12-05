@@ -1,299 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <link rel="icon" href="fav.png" type="image/png">
+
 <meta charset="UTF-8">
+
 <title>PTTS V1</title>
+
 <style>
+
 /* === GLOBAL === */
+
 body {
+
     font-family: Arial, sans-serif;
+
     background: radial-gradient(circle at top, #0d1117, #000000);
+
     padding: 0;
+
     margin: 0;
+
     display: flex;
+
     justify-content: center;
+
     align-items: flex-start;
+
     height: 100vh;
+
     color: #e5e5e5;
+
 }
 
 
 
 /* === GLASS CONTAINER === */
+
 .container {
+
     width: 90%;
+
     max-width: 500px;
+
     margin-top: 40px;
+
     padding: 25px;
+
     border-radius: 16px;
 
+
+
     /* Glass effect */
+
     background: rgba(20, 25, 35, 0.45);
+
     backdrop-filter: blur(12px);
+
     -webkit-backdrop-filter: blur(12px);
 
+
+
     border: 1px solid rgba(0, 255, 255, 0.08);
+
     box-shadow: 0px 8px 32px rgba(0, 255, 255, 0.12);
+
 }
+
+
 
 h2 {
+
     text-align: center;
+
     margin-bottom: 20px;
-    color: #465e73;
+
+    color: #00eaff;
+
     font-weight: 700;
+
 }
+
+
 
 /* === LABELS === */
+
 label {
+
     font-size: 15px;
+
     font-weight: 600;
+
     margin-top: 10px;
+
     display: block;
-    color: #465e73;
+
+    color: #a9d5ff;
+
 }
+
+
 
 /* === INPUTS & TEXTAREA === */
+
 input, textarea, select {
+
     width: 100%;
+
     margin-top: 6px;
+
     padding: 12px;
 
+
+
     border-radius: 10px;
+
     background: rgba(30, 30, 30, 0.95); /* Darker background */
+
     border: 1px solid rgba(0, 255, 255, 0.2);
+
     color: #ffffff; /* White text */
-    
+
+   
+
     font-size: 15px;
+
     outline: none;
+
     box-sizing: border-box;
 
+
+
     transition: border 0.2s, background 0.2s;
+
 }
+
+
 
 select option {
+
     background-color: #1e1e1e; /* Dark dropdown options */
+
     color: #ffffff;             /* White text for options */
+
 }
-    
+
+   
+
 /* === INPUTS & TEXTAREA === */
+
 input, textarea, select {
+
     width: 100%;
+
     margin-top: 6px;
+
     padding: 12px;
 
+
+
     border-radius: 10px;
+
     background: rgba(255,255,255,0.05);
+
     border: 1px solid rgba(0, 255, 255, 0.2);
+
     color: #e5e5e5;
-    
+
+   
+
     font-size: 15px;
+
     outline: none;
+
     box-sizing: border-box;
 
+
+
     transition: border 0.2s, background 0.2s;
+
 }
+
+
 
 input:focus, textarea:focus, select:focus {
-    border-color: #465e73;
+
+    border-color: #00eaff;
+
     background: rgba(0, 255, 255, 0.07);
+
 }
+
+
 
 textarea {
+
     resize: none;
+
     height: 120px;
+
 }
+
+
 
 /* === PRIMARY BUTTON === */
+
 button {
+
     width: 100%;
+
     padding: 14px;
+
     font-size: 16px;
+
     margin-top: 20px;
+
     border: none;
+
     border-radius: 10px;
 
-    background: #465e73;
-    background: linear-gradient(135deg, #465e73, #465e73);
+
+
+    background: #00c8ff;
+
+    background: linear-gradient(135deg, #00eaff, #00aaff);
+
     color: #00141a;
+
     font-weight: bold;
+
     cursor: pointer;
+
+
 
     box-shadow: 0px 4px 20px rgba(0, 200, 255, 0.25);
+
     transition: 0.2s ease;
+
 }
+
+
 
 button:hover {
-    background: linear-gradient(135deg, #465e73, #465e73);
+
+    background: linear-gradient(135deg, #00ffff, #00bbff);
+
     transform: translateY(-1px);
+
 }
+
+
 
 /* === DONATE BUTTON === */
+
 .donateBtn {
+
     margin-top: 15px;
-    background: linear-gradient(135deg, #465e73, #465e73);
+
+    background: linear-gradient(135deg, #00ffc8, #00cc96);
+
     padding: 14px;
+
     color: #002016;
+
     border: none;
+
     width: 100%;
+
     border-radius: 10px;
+
     font-size: 16px;
+
     cursor: pointer;
+
     transition: 0.25s ease;
+
     font-weight: bold;
+
     box-shadow: 0px 4px 20px rgba(0, 255, 200, 0.25);
+
 }
+
+
 
 .donateBtn:hover {
-    background: linear-gradient(135deg, #465e73, #465e73);
+
+    background: linear-gradient(135deg, #00ffe0, #00e0ad);
+
     transform: translateY(-1px);
+
 }
+
+
 
 /* === AUDIO PLAYER === */
+
 #audioPlayer {
+
     width: 100%;
+
     margin-top: 20px;
+
     display: none;
 
+
+
     background: rgba(255, 255, 255, 0.05);
+
     backdrop-filter: blur(8px);
+
     padding: 8px;
+
     border-radius: 10px;
+
 }
+
+
 
 /* === LOADING TEXT === */
+
 .loading {
+
     margin-top: 10px;
+
     text-align: center;
+
     font-size: 14px;
-    color: #465e73;
+
+    color: #7fdfff;
+
 }
 
+
+
 </style>
+
 </head>
+
 <body>
 
+
+
 <div class="container">
+
     <h2>Penn's Text To Speech Blackmailer</h2>
+
     <small>To get user id contact me in person or at <em>tts@pennbrenn.com</em></small>
 
+
+
     <label>User ID:</label>
+
     <input type="text" id="userId" placeholder="Enter your user ID">
 
+
+
     <label>Choose a voice:</label>
+
     <select id="voiceId">
+
         <option>Loading voices...</option>
+
     </select>
 
+
+
     <label>Text to speak:</label>
-    <textarea id="text" placeholder="Type something..." maxlength="500"></textarea>
-    <small id="charCount" style="float: right; color: #465e73; font-size: 13px;">0 / 500</small>
+
+    <textarea id="text" placeholder="Type something..."></textarea>
+
+
 
     <button onclick="generateAudio()">Speak</button>
 
+
+
     <div id="loading" class="loading" style="display:none;">Generating audio...</div>
-    
+
+
+
     <audio id="audioPlayer" controls></audio>
 
+
+
 <br>
-    
+
+   
+
         <button class="donateBtn" onclick="window.open('https://gl.me/u/GWqmZ8skMh4D', '_blank')">
+
     ❤️ Donate
+
     </button>
+
 </div>
 
+
+
 <script>
-// ============================
-// LOAD VOICES AUTOMATICALLY
-// ============================
-async function loadVoices() {
-    try {
-        const res = await fetch("/api/tts");
-        const data = await res.json();
 
-        const select = document.getElementById("voiceId");
-        select.innerHTML = "";
-
-        data.voices.forEach(v => {
-            const opt = document.createElement("option");
-            opt.value = v.id;
-            opt.textContent = v.name;
-            select.appendChild(opt);
+    // ============================
+    
+    // LOAD VOICES AUTOMATICALLY
+    
+    // ============================
+    
+    async function loadVoices() {
+    
+        try {
+    
+            const res = await fetch("/api/tts");
+    
+            const data = await res.json();
+    
+    
+    
+            const select = document.getElementById("voiceId");
+    
+            select.innerHTML = "";
+    
+    
+    
+            data.voices.forEach(v => {
+    
+                const opt = document.createElement("option");
+    
+                opt.value = v.id;
+    
+                opt.textContent = v.name;
+    
+                select.appendChild(opt);
+    
+            });
+    
+    
+    
+        } catch (e) {
+    
+            alert("Failed to load voices.");
+    
+        }
+    
+    }
+    
+    
+    
+    loadVoices();
+    
+    
+    
+    
+    
+    // ============================
+    
+    // GENERATE AUDIO
+    
+    // ============================
+    
+    async function generateAudio() {
+    
+        const userId = document.getElementById("userId").value.trim();
+    
+        const text = document.getElementById("text").value.trim();
+    
+        const voiceId = document.getElementById("voiceId").value;
+    
+    
+    
+        if (!userId) return alert("Please enter your User ID.");
+    
+        if (!text) return alert("Please type some text.");
+    
+    
+    
+        document.getElementById("loading").style.display = "block";
+    
+    
+    
+        const response = await fetch("/api/tts", {
+    
+            method: "POST",
+    
+            body: JSON.stringify({ userId, text, voiceId })
+    
         });
-
-    } catch (e) {
-        alert("Failed to load voices.");
+    
+    
+    
+        document.getElementById("loading").style.display = "none";
+    
+    
+    
+        if (!response.ok) {
+    
+            alert("Error generating audio.");
+    
+            return;
+    
+        }
+    
+    
+    
+        const audioBlob = await response.blob();
+    
+        const audioUrl = URL.createObjectURL(audioBlob);
+    
+    
+    
+        const player = document.getElementById("audioPlayer");
+    
+        player.src = audioUrl;
+    
+        player.style.display = "block";
+    
+        player.play();
+    
     }
-}
-
-loadVoices();
-
-
-// ============================
-// GENERATE AUDIO
-// ============================
-async function generateAudio() {
-    const userId = document.getElementById("userId").value.trim();
-    const text = document.getElementById("text").value.trim();
-    const voiceId = document.getElementById("voiceId").value;
-
-    if (!userId) return alert("Please enter your User ID.");
-    if (!text) return alert("Please type some text.");
-
-    document.getElementById("loading").style.display = "block";
-
-    const response = await fetch("/api/tts", {
-        method: "POST",
-        body: JSON.stringify({ userId, text, voiceId })
-    });
-
-    document.getElementById("loading").style.display = "none";
-
-    if (!response.ok) {
-        alert("Error generating audio.");
-        return;
-    }
-
-    const audioBlob = await response.blob();
-    const audioUrl = URL.createObjectURL(audioBlob);
-
-    const player = document.getElementById("audioPlayer");
-    player.src = audioUrl;
-    player.style.display = "block";
-    player.play();
-}
-
-// ============================
-  // CHARACTER COUNT LOGIC
-  // ============================
-  function updateCharacterCount() {
-      const textarea = document.getElementById("text");
-      const charCount = document.getElementById("charCount");
-      const maxLength = textarea.getAttribute("maxlength");
-      const currentLength = textarea.value.length;
- 
-      charCount.textContent = `${currentLength} / ${maxLength}`;
-     
-      // Optional: Visually indicate when the limit is reached
-      if (currentLength >= maxLength) {
-          charCount.style.color = "#ff6b6b"; // Red
-      } else {
-          charCount.style.color = "#465e73"; // Original color
-      }
-  }
- 
-  // Add an event listener to the textarea
-  document.addEventListener("DOMContentLoaded", () => {
-      const textarea = document.getElementById("text");
-      // Update the count on input (typing) and when the page loads
-      if (textarea) {
-          textarea.addEventListener("input", updateCharacterCount);
-          updateCharacterCount(); // Initial count
-      }
-  });
- 
-
-</script>
+    
+    </script>
 
 </body>
 </html>
