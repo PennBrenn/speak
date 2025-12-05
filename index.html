@@ -58,6 +58,29 @@ input, textarea, select {
     padding: 12px;
 
     border-radius: 10px;
+    background: rgba(30, 30, 30, 0.95); /* Darker background */
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    color: #ffffff; /* White text */
+    
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+
+    transition: border 0.2s, background 0.2s;
+}
+
+select option {
+    background-color: #1e1e1e; /* Dark dropdown options */
+    color: #ffffff;             /* White text for options */
+}
+    
+/* === INPUTS & TEXTAREA === */
+input, textarea, select {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+
+    border-radius: 10px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(0, 255, 255, 0.2);
     color: #e5e5e5;
