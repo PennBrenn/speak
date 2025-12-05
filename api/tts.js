@@ -90,7 +90,36 @@ export default async function handler(req, res) {
     }
   }
 
-
+  // ============================
+  // CHARACTER COUNT LOGIC
+  // ============================
+  function updateCharacterCount() {
+      const textarea = document.getElementById("text");
+      const charCount = document.getElementById("charCount");
+      const maxLength = textarea.getAttribute("maxlength");
+      const currentLength = textarea.value.length;
+  
+      charCount.textContent = `${currentLength} / ${maxLength}`;
+      
+      // Optional: Visually indicate when the limit is reached
+      if (currentLength >= maxLength) {
+          charCount.style.color = "#ff6b6b"; // Red
+      } else {
+          charCount.style.color = "#465e73"; // Original color
+      }
+  }
+  
+  // Add an event listener to the textarea
+  document.addEventListener("DOMContentLoaded", () => {
+      const textarea = document.getElementById("text");
+      // Update the count on input (typing) and when the page loads
+      if (textarea) {
+          textarea.addEventListener("input", updateCharacterCount);
+          updateCharacterCount(); // Initial count
+      }
+  });
+  
+  // The rest of your script (loadVoices and generateAudio) remains...
 
   // =====================================================
   //                  METHOD NOT ALLOWED

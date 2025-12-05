@@ -38,7 +38,7 @@ body {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #00eaff;
+    color: #465e73;
     font-weight: 700;
 }
 
@@ -48,7 +48,7 @@ label {
     font-weight: 600;
     margin-top: 10px;
     display: block;
-    color: #a9d5ff;
+    color: #465e73;
 }
 
 /* === INPUTS & TEXTAREA === */
@@ -93,7 +93,7 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #00eaff;
+    border-color: #465e73;
     background: rgba(0, 255, 255, 0.07);
 }
 
@@ -111,8 +111,8 @@ button {
     border: none;
     border-radius: 10px;
 
-    background: #00c8ff;
-    background: linear-gradient(135deg, #00eaff, #00aaff);
+    background: #465e73;
+    background: linear-gradient(135deg, #465e73, #465e73);
     color: #00141a;
     font-weight: bold;
     cursor: pointer;
@@ -122,14 +122,14 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(135deg, #00ffff, #00bbff);
+    background: linear-gradient(135deg, #465e73, #465e73);
     transform: translateY(-1px);
 }
 
 /* === DONATE BUTTON === */
 .donateBtn {
     margin-top: 15px;
-    background: linear-gradient(135deg, #00ffc8, #00cc96);
+    background: linear-gradient(135deg, #465e73, #465e73);
     padding: 14px;
     color: #002016;
     border: none;
@@ -143,7 +143,7 @@ button:hover {
 }
 
 .donateBtn:hover {
-    background: linear-gradient(135deg, #00ffe0, #00e0ad);
+    background: linear-gradient(135deg, #465e73, #465e73);
     transform: translateY(-1px);
 }
 
@@ -164,7 +164,7 @@ button:hover {
     margin-top: 10px;
     text-align: center;
     font-size: 14px;
-    color: #7fdfff;
+    color: #465e73;
 }
 
 </style>
@@ -184,11 +184,12 @@ button:hover {
     </select>
 
     <label>Text to speak:</label>
-    <textarea id="text" placeholder="Type something..."></textarea>
+    <textarea id="text" placeholder="Type something..." **maxlength="500"**></textarea>
 
     <button onclick="generateAudio()">Speak</button>
 
     <div id="loading" class="loading" style="display:none;">Generating audio...</div>
+    <small id="charCount" style="float: right; color: #465e73; font-size: 13px;">0 / 500</small>
 
     <audio id="audioPlayer" controls></audio>
 
