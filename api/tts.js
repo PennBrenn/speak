@@ -1,6 +1,9 @@
 // ---- USER IDS ----
 const allowedUsers = [
-  "plmsyd",
+  "sync_bz5",
+  "guest_hd812ndaldu12ednsdausdw",
+  "aids_lr5",
+  "smd",
 ];
 // -------------------
 
