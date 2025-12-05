@@ -10,149 +10,8 @@
 <title>PTTS V1</title>
 
 <style>
+
 /* === GLOBAL === */
-body {
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at top, #0d1117, #000000);
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    color: #e5e5e5;
-}
-
-/* === GLASS CONTAINER === */
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin-top: 40px;
-    padding: 25px;
-    border-radius: 16px;
-
-    background: rgba(20, 25, 35, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(70, 94, 115, 0.25);
-    box-shadow: 0px 8px 32px rgba(70, 94, 115, 0.25);
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #465e73;
-    font-weight: 700;
-}
-
-/* === LABELS === */
-label {
-    font-size: 15px;
-    font-weight: 600;
-    margin-top: 10px;
-    display: block;
-    color: #c8d6e0;
-}
-
-/* === INPUTS & TEXTAREA === */
-input, textarea, select {
-    width: 100%;
-    margin-top: 6px;
-    padding: 12px;
-
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(70, 94, 115, 0.35);
-    color: #e5e5e5;
-
-    font-size: 15px;
-    outline: none;
-    box-sizing: border-box;
-
-    transition: border 0.2s, background 0.2s;
-}
-
-select option {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-
-input:focus, textarea:focus, select:focus {
-    border-color: #465e73;
-    background: rgba(70, 94, 115, 0.15);
-}
-
-textarea {
-    resize: none;
-    height: 120px;
-}
-
-/* === PRIMARY BUTTON === */
-button {
-    width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    margin-top: 20px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: linear-gradient(135deg, #465e73, #2f3f4d);
-    color: #e5e5e5;
-    font-weight: bold;
-    cursor: pointer;
-
-    box-shadow: 0px 4px 20px rgba(70, 94, 115, 0.35);
-    transition: 0.2s ease;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #58748e, #344757);
-    transform: translateY(-1px);
-}
-
-/* === DONATE BUTTON === */
-.donateBtn {
-    margin-top: 15px;
-    background: linear-gradient(135deg, #465e73, #2f3f4d);
-    padding: 14px;
-
-    color: #e5e5e5;
-    border: none;
-    width: 100%;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.25s ease;
-    font-weight: bold;
-    box-shadow: 0px 4px 20px rgba(70, 94, 115, 0.35);
-}
-
-.donateBtn:hover {
-    background: linear-gradient(135deg, #58748e, #364959);
-    transform: translateY(-1px);
-}
-
-/* === AUDIO PLAYER === */
-#audioPlayer {
-    width: 100%;
-    margin-top: 20px;
-    display: none;
-
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    padding: 8px;
-    border-radius: 10px;
-}
-
-/* === LOADING TEXT === */
-.loading {
-    margin-top: 10px;
-    text-align: center;
-    font-size: 14px;
-    color: #7fa3bd;
-}
 
 </style>
 
@@ -201,6 +60,7 @@ button:hover {
 
 
     <audio id="audioPlayer" controls></audio>
+
 
 
 <br>
