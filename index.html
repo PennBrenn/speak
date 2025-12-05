@@ -184,12 +184,13 @@ button:hover {
     </select>
 
     <label>Text to speak:</label>
-    <textarea id="text" placeholder="Type something..." **maxlength="500"**></textarea>
+    <textarea id="text" placeholder="Type something..." maxlength="500"></textarea>
+    <small id="charCount" style="float: right; color: #465e73; font-size: 13px;">0 / 500</small>
 
     <button onclick="generateAudio()">Speak</button>
 
     <div id="loading" class="loading" style="display:none;">Generating audio...</div>
-    <small id="charCount" style="float: right; color: #465e73; font-size: 13px;">0 / 500</small>
+    
 
     <audio id="audioPlayer" controls></audio>
 
