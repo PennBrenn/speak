@@ -11,6 +11,13 @@ export default async function handler(req, res) {
   // =====================================================
   //                   GET → RETURN VOICES
   // =====================================================
+
+  // ---- BLOCKED VOICE IDS ----
+  const blockedVoices = [
+    "ElVDyvTtykmY2kynfxR8",
+    // Add more...
+  ];
+
   if (req.method === "GET") {
     try {
       // Fetch all voices
@@ -24,9 +31,12 @@ export default async function handler(req, res) {
       const data = await voicesRes.json();
 
 
-      // Filter to ONLY custom voices:
+      // Filter categories AND remove blocked voices
       const voicesFormatted = data.voices
-        .filter(v => v.category === "cloned" || v.category === "generated")
+        .filter(v =>
+          (v.category === "cloned" || v.category === "generated") &&
+          !blockedVoices.includes(v.voice_id)   // remove forbidden voices
+        )
         .map(v => ({
           id: v.voice_id,
           name: v.name
