@@ -190,8 +190,8 @@ button:hover {
 
     <label>Text to speak:</label>
 
-    <textarea id="text" placeholder="Type anything here..."></textarea>
-
+    <textarea id="text" placeholder="Type anything here..." maxlength="500"></textarea>
+    <small id="charCount" style="float: right; color: #a9d5ff; font-size: 13px;">0 / 500</small>
 
 
     <button onclick="generateAudio()">Speak</button>
@@ -340,6 +340,37 @@ button:hover {
         player.play();
     
     }
+    
+    // ============================
+// CHARACTER COUNT LOGIC
+// ============================
+function updateCharacterCount() {
+    const textarea = document.getElementById("text");
+    const charCount = document.getElementById("charCount");
+    const maxLength = textarea.getAttribute("maxlength");
+    const currentLength = textarea.value.length;
+
+    charCount.textContent = `${currentLength} / ${maxLength}`;
+    
+    // Optional: Visually indicate when the limit is reached
+    if (currentLength >= maxLength) {
+        charCount.style.color = "#ff6b6b"; // Red
+    } else {
+        charCount.style.color = "#a9d5ff"; // Original color
+    }
+}
+
+// Add an event listener to the textarea
+document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.getElementById("text");
+    // Update the count on input (typing) and when the page loads
+    if (textarea) {
+        textarea.addEventListener("input", updateCharacterCount);
+        updateCharacterCount(); // Initial count
+    }
+});
+
+// The rest of your script (loadVoices and generateAudio) remains...
     
     </script>
 
