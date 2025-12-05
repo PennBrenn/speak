@@ -1,9 +1,6 @@
 // ---- USER IDS ----
 const allowedUsers = [
-  "sync_bz5",
-  "guest_hd812ndaldu12ednsdausdw",
-  "aids_lr5",
-  "smd",
+  "plmsyd",
 ];
 // -------------------
 
@@ -14,7 +11,6 @@ export default async function handler(req, res) {
   // =====================================================
   //                   GET → RETURN VOICES
   // =====================================================
-
   if (req.method === "GET") {
     try {
       // Fetch all voices
@@ -28,7 +24,7 @@ export default async function handler(req, res) {
       const data = await voicesRes.json();
 
 
-      // Filter categories AND remove blocked voices
+      // Filter to ONLY custom voices:
       const voicesFormatted = data.voices
         .filter(v => v.category === "cloned" || v.category === "generated")
         .map(v => ({
@@ -37,13 +33,12 @@ export default async function handler(req, res) {
         }));
 
 
-
       return res.status(200).json({ voices: voicesFormatted });
 
 
     } catch (err) {
       console.error("VOICE LOAD ERROR:", err);
-      return res.status(500).json({ error: "Failed to load voices, please reload the page" });
+      return res.status(500).json({ error: "Failed to load voices" });
     }
   }
 
@@ -110,9 +105,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "TTS generation failed" });
     }
   }
-
-  // The rest of your script (loadVoices and generateAudio) remains...
-
 
   // =====================================================
   //                  METHOD NOT ALLOWED
