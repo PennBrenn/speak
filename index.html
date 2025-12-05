@@ -19,35 +19,6 @@ body {
 }
 
 
-/* === CUSTOM SCROLLBAR STYLES (The requested feature) === */
-/* Target Webkit browsers (Chrome, Edge, Safari) */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px; /* Important for horizontal scrollbars */
-}
-
-::-webkit-scrollbar-track {
-    background: #1e1e1e; /* Dark track */
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #465e73; /* Accent color for the thumb */
-    border-radius: 10px;
-    /* Adding a slight hover effect for better aesthetics */
-    transition: background 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #5d758b; /* Lighter shade on hover */
-}
-
-/* For Firefox: Use the standard way */
-html {
-    scrollbar-color: #465e73 #1e1e1e; /* thumb color | track color */
-    scrollbar-width: thin;
-}
-/* === END CUSTOM SCROLLBAR STYLES === */
 
 /* === GLASS CONTAINER === */
 .container {
@@ -222,7 +193,6 @@ button:hover {
 
     <div id="loading" class="loading" style="display:none;">Generating audio...</div>
     
-
     <audio id="audioPlayer" controls></audio>
 
 <br>
