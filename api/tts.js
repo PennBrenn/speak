@@ -1,8 +1,6 @@
 // ---- USER IDS ----
 const allowedUsers = [
-  "guest",
-  "penn",
-  "garmin"
+  "plmsyd",
 ];
 // -------------------
 
