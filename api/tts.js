@@ -2,7 +2,7 @@
 const allowedUsers = [
   "sync_ey5",
   "pen",
-  "aids_rl5",
+  "wes",
 ];
 // -------------------
 
